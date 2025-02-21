@@ -5,13 +5,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import csv
 import io
+import os
 import openpyxl
 from io import BytesIO
 from sqlalchemy.orm import aliased
 from sqlalchemy import or_
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
+
+
+
+basedir = os.path.abspath(os.path.dirname(__file__))  # Get the main project directory
+instance_dir = os.path.join(basedir, 'instance')  # Ensure instance folder is inside the main project
+os.makedirs(instance_dir, exist_ok=True)  # Create instance folder if it doesn't exist
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(instance_dir, 'finance.db')
+
+
 app.config['SECRET_KEY'] = 'your_secret_key'
 db = SQLAlchemy(app)
 
