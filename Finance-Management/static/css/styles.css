@@ -1,0 +1,375 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: #333;
+    border-radius: 8px;
+}
+
+nav a {
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin: 0 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #45a049; /* Slightly different hover color */
+    color: #fff; /* Ensure the text color stays readable */
+    border-radius: 5px;
+}
+
+/* Main Content Styles */
+main {
+    padding: 40px 20px;
+}
+
+/* Flash Message Styles */
+.flash-messages {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+.flash-messages p {
+    margin: 0;
+}
+
+/* Form Styles */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05); /* Button enlarges slightly on hover */
+}
+
+button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+
+    form input, form select, form textarea {
+        font-size: 0.9rem;
+    }
+
+    .flash-messages {
+        font-size: 0.9rem;
+    }
+}
+
+/* Page Specific Styles */
+
+/* Index Page */
+#index-page {
+    text-align: center;
+    margin: 40px 0;
+}
+
+#index-page h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#index-page p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Login and Register Page */
+.login-register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 20px;
+}
+
+form input {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+form .form-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Transaction Page */
+.transactions-page {
+    margin-top: 20px;
+}
+
+.transactions-page .search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.transactions-page input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.transactions-page .search-bar input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.transactions-page .search-bar input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Edit Transaction Page */
+.edit-transaction-page form {
+    background-color: #fff;
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.edit-transaction-page form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Report Page */
+.report-page {
+    margin-top: 20px;
+}
+
+.report-page h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.report-page .total-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Modal Styles for Image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.modal-content img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Custom Input Styles */
+input[type="text"], input[type="password"], input[type="email"], select, textarea {
+    font-size: 1rem;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Loading Spinner */
+.spinner {
+    display: block;
+    margin: 20px auto;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #4CAF50;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Additional Responsive Adjustments */
+@media (max-width: 480px) {
+    .transactions-page .search-bar input[type="text"] {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    nav a {
+        font-size: 1rem;
+    }
+}

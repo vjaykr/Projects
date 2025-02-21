@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Financial Report</h2>
+<p>Total Amount: {{ total_amount }}</p>
+
+<!-- Buttons for PDF and Excel -->
+
+<button onclick="window.location.href='{{ url_for('export_excel') }}'">Export to Excel</button>
+
+{% endblock %}
+
+
