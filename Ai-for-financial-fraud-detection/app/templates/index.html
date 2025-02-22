@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fraud Detection System</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="transaction_type">Transaction Type:</label>
+                <select name="transaction_type" id="transaction_type">
+                    <option value="CASH_OUT">Cash Out</option>
+                    <option value="PAYMENT">Payment</option>
+                    <option value="TRANSFER">Transfer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amount">Transaction Amount:</label>
+                <input type="number" name="amount" id="amount" placeholder="Enter transaction amount" required>
+            </div>
+            <div class="form-group">
+                <label for="sender_balance">Sender's Current Balance:</label>
+                <input type="number" name="sender_balance" id="sender_balance" placeholder="Enter sender's balance" required>
+            </div>
+            <div class="form-group">
+                <label for="receiver_balance">Receiver's Current Balance:</label>
+                <input type="number" name="receiver_balance" id="receiver_balance" placeholder="Enter receiver's balance" required>
+            </div>
+            <button type="submit" class="btn">Check for Fraud</button>
+        </form>
+        {% if result %}
+        <div class="result">
+            <h2>Result:</h2>
+            <p>{{ result|safe }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
