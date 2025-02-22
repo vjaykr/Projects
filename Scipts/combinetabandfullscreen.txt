@@ -1,0 +1,183 @@
+// ==UserScript==
+// @name         Universal Tab Switch & Fullscreen Detection Bypass (Combined) jay shree ram
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Prevent websites from detecting tab switching and block fullscreen mode on all websites.
+// @author       EthicalHackerGPT
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function () {
+    'use strict';
+
+    console.log('Universal Tab Switch & Fullscreen Detection Bypass activated.');
+
+    // ------------------------- Tab Switch Detection Bypass -------------------------
+
+    // Override visibilityState and hidden properties
+    Object.defineProperty(document, 'visibilityState', {
+        get: () => 'visible',
+        configurable: true
+    });
+    Object.defineProperty(document, 'hidden', {
+        get: () => false,
+        configurable: true
+    });
+
+    // Prevent visibilitychange events
+    document.addEventListener('visibilitychange', (e) => {
+        e.stopImmediatePropagation();
+        console.log('Blocked visibilitychange event.');
+    }, true);
+
+    // Prevent blur and focus events
+    const blockEvent = (eventType) => {
+        window.addEventListener(eventType, (e) => {
+            e.stopImmediatePropagation();
+            console.log(`Blocked ${eventType} event.`);
+        }, true);
+    };
+    blockEvent('blur');
+    blockEvent('focus');
+
+    // Override focus and blur methods
+    const noop = () => {};
+    window.blur = noop;
+    window.focus = noop;
+
+    // Monkey-patch addEventListener to block event registrations
+    const originalAddEventListener = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function (type, listener, options) {
+        if (['visibilitychange', 'blur', 'focus'].includes(type)) {
+            console.log(`Blocked attempt to add listener for ${type}.`);
+            return;
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+    };
+
+    // Remove existing visibilitychange, blur, and focus listeners
+    const removeExistingListeners = () => {
+        ['visibilitychange', 'blur', 'focus'].forEach(eventType => {
+            const oldListeners = getEventListeners(window)?.[eventType] || [];
+            oldListeners.forEach(listener => {
+                window.removeEventListener(eventType, listener.listener);
+                console.log(`Removed existing ${eventType} listener.`);
+            });
+        });
+    };
+
+    // Periodically remove dynamically added listeners
+    setInterval(removeExistingListeners, 1000);
+
+    console.log('Tab switch detection bypass setup completed.');
+
+    // ------------------------- Fullscreen Mode Disabling -------------------------
+
+    // Utility function to log blocked attempts
+    const logBlock = (methodName) => {
+        console.warn(`Fullscreen attempt blocked: ${methodName}`);
+    };
+
+    // Disable Fullscreen API
+    const disableFullscreenAPI = () => {
+        const noOp = () => {
+            logBlock('Fullscreen API');
+            return Promise.resolve();
+        };
+
+        // Disable document.fullscreenEnabled
+        Object.defineProperty(document, 'fullscreenEnabled', {
+            get: () => false,
+            configurable: false
+        });
+
+        // Override fullscreen methods
+        document.exitFullscreen = noOp;
+        Element.prototype.requestFullscreen = noOp;
+        Element.prototype.webkitRequestFullscreen = noOp;
+        Element.prototype.mozRequestFullScreen = noOp;
+        Element.prototype.msRequestFullscreen = noOp;
+    };
+
+    // Detect and prevent fullscreen change events
+    const monitorFullscreenChanges = () => {
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+                alert('Fullscreen mode is disabled.');
+            }
+        }, true);
+
+        // Block other vendor-prefixed events
+        const vendorEvents = [
+            'webkitfullscreenchange',
+            'mozfullscreenchange',
+            'MSFullscreenChange'
+        ];
+        vendorEvents.forEach(event => {
+            document.addEventListener(event, () => {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                    alert('Fullscreen mode is disabled.');
+                }
+            }, true);
+        });
+    };
+
+    // Monitor shadow DOM for fullscreen requests
+    const monitorShadowDOM = () => {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach(mutation => {
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.shadowRoot) {
+                            disableFullscreenAPI();
+                        }
+                    });
+                }
+            });
+        });
+
+        observer.observe(document, {
+            childList: true,
+            subtree: true
+        });
+    };
+
+    // Disable iframes from entering fullscreen
+    const disableIframeFullscreen = () => {
+        const iframes = document.getElementsByTagName('iframe');
+        for (let iframe of iframes) {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.exitFullscreen = () => logBlock('Iframe Fullscreen API');
+                Element.prototype.requestFullscreen = () => logBlock('Iframe Fullscreen API');
+            } catch (e) {
+                console.warn('Unable to access iframe to block fullscreen: ', e);
+            }
+        }
+    };
+
+    // Periodically reapply protections (to handle dynamic scripts)
+    const reapplyProtections = () => {
+        setInterval(() => {
+            disableFullscreenAPI();
+            disableIframeFullscreen();
+        }, 1000); // Check every second
+    };
+
+    // Initialize all protections
+    const initializeProtections = () => {
+        disableFullscreenAPI();
+        monitorFullscreenChanges();
+        monitorShadowDOM();
+        disableIframeFullscreen();
+        reapplyProtections();
+    };
+
+    // Run the script
+    initializeProtections();
+
+    console.log('Fullscreen mode disabling setup completed.');
+})();

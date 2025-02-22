@@ -1,0 +1,91 @@
+// ==UserScript==
+// @name         Disable Fullscreen Mode (Improved) jay shree ram
+// @namespace    http://tampermonkey.net/
+// @version      1.2
+// @description  Block fullscreen mode on all websites, including advanced techniques
+// @author       Your Name
+// @match        *://*/*
+// @grant        none
+// @run-at       document-start
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const blockFullscreen = () => {
+        console.warn('Fullscreen mode blocked.');
+
+        const noOp = () => Promise.resolve();
+
+        // Override Fullscreen API methods
+        Object.defineProperty(document, 'fullscreenEnabled', {
+            get: () => false,
+            configurable: true
+        });
+
+        document.exitFullscreen = noOp;
+        Element.prototype.requestFullscreen = noOp;
+        Element.prototype.webkitRequestFullscreen = noOp;
+        Element.prototype.mozRequestFullScreen = noOp;
+        Element.prototype.msRequestFullscreen = noOp;
+
+        // Detect and prevent fullscreen changes
+        const blockEvent = (event) => {
+            console.warn(`Fullscreen event blocked: ${event.type}`);
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+                alert('Fullscreen mode is disabled.');
+            }
+        };
+
+        document.addEventListener('fullscreenchange', blockEvent, true);
+        document.addEventListener('webkitfullscreenchange', blockEvent, true);
+        document.addEventListener('mozfullscreenchange', blockEvent, true);
+        document.addEventListener('MSFullscreenChange', blockEvent, true);
+    };
+
+    const observeDOM = () => {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) { // ELEMENT_NODE
+                        if (node.shadowRoot) {
+                            // Reapply protections to shadow DOMs
+                            blockFullscreen();
+                        }
+                        // Check for iframe elements
+                        if (node.tagName === 'IFRAME') {
+                            try {
+                                const iframeDoc = node.contentDocument || node.contentWindow.document;
+                                iframeDoc.exitFullscreen = () => console.warn('Iframe Fullscreen API blocked.');
+                                iframeDoc.requestFullscreen = () => console.warn('Iframe Fullscreen API blocked.');
+                            } catch (e) {
+                                console.warn('Unable to access iframe for fullscreen blocking:', e);
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
+        observer.observe(document, {
+            childList: true,
+            subtree: true
+        });
+    };
+
+    const periodicallyReapply = () => {
+        setInterval(() => {
+            blockFullscreen();
+        }, 1000); // Reapply protections every second
+    };
+
+    // Initialize protections
+    const init = () => {
+        blockFullscreen();
+        observeDOM();
+        periodicallyReapply();
+    };
+
+    init();
+})();

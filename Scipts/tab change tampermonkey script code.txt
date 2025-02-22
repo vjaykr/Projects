@@ -1,0 +1,50 @@
+// ==UserScript==
+// @name         Universal Tab Switch Detection Bypass (Fixed Timer) first one
+// @namespace    http://tampermonkey.net/
+// @version      1.2
+// @description  Prevent websites from detecting tab switching while maintaining correct timing.
+// @author       EthicalHackerGPT
+// @match        *://*/*
+// @grant        none
+// @run-at       document-start
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Override visibilityState and hidden properties globally
+    Object.defineProperty(Document.prototype, 'visibilityState', {
+        get: () => 'visible',
+        configurable: true
+    });
+    Object.defineProperty(Document.prototype, 'hidden', {
+        get: () => false,
+        configurable: true
+    });
+
+    // Prevent visibilitychange events
+    const noop = () => {};
+    window.addEventListener('visibilitychange', noop, true);
+    window.addEventListener('blur', noop, true);
+    window.addEventListener('focus', noop, true);
+
+    // Override focus and blur methods
+    window.blur = noop;
+    window.focus = noop;
+
+    // Block direct event listener registrations
+    const originalAddEventListener = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function(type, listener, options) {
+        if (['visibilitychange', 'blur', 'focus'].includes(type)) {
+            console.log(`Blocked attempt to add listener for ${type}.`);
+            return;
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+    };
+
+    // Block inline event handlers
+    Object.defineProperty(window, 'onblur', { set: noop, configurable: true });
+    Object.defineProperty(window, 'onfocus', { set: noop, configurable: true });
+
+    console.log('Tab switch detection bypass setup completed.');
+})();
