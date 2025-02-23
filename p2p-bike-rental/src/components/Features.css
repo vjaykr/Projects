@@ -1,0 +1,36 @@
+/* Features.css */
+.features {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.feature-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 30%; /* Adjust the width to fit in a row */
+}
+
+.feature-box h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.feature-box p {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    align-items: center; /* Center-align the items */
+  }
+
+  .feature-box {
+    width: 80%; /* Make each card take up more width on smaller screens */
+    margin-bottom: 20px; /* Add space between the cards */
+  }
+}

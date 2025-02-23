@@ -1,0 +1,29 @@
+/* PopularDestinations.css */
+.popular-destinations {
+  background-color: #f0f4f8;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.destination {
+  display: inline-block;
+  margin: 20px;
+  width: 30%;
+}
+
+.destination img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.destination h4 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .destination {
+    width: 80%;
+    margin: 20px auto;
+  }
+}

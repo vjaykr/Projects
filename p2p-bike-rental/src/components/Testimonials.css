@@ -1,0 +1,19 @@
+/* Testimonials.css */
+.testimonials {
+  background-color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.testimonial {
+  margin-bottom: 30px;
+}
+
+.testimonial p {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.testimonial p:first-child {
+  font-size: 20px;
+}

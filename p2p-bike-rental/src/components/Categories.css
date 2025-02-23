@@ -1,0 +1,39 @@
+/* Categories.css */
+.categories {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.category {
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 22%; /* Adjust the width to fit in a row */
+  margin-bottom: 20px;
+}
+
+.category img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.category h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .categories {
+    justify-content: center;
+  }
+
+  .category {
+    width: 80%; /* Make each card take up more width on smaller screens */
+    margin-bottom: 20px; /* Add space between the cards */
+  }
+}
