@@ -9,6 +9,7 @@
   color: white;
   position: relative;
   padding: 20px;
+  background-size: cover;
 }
 
 /* Dark Overlay */
@@ -84,6 +85,7 @@
 @media (max-width: 768px) {
   .hero {
     height: 80vh;
+    background-size: cover;
   }
 
   .hero h1 {

@@ -1,3 +1,15 @@
+/* Global Fix for Horizontal Scroll Issue */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 /* Navbar Styles */
 header {
   background-color: #007bff;
@@ -16,11 +28,15 @@ header .container {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  max-width: 100%;
+  width: 100%;
 }
 
+/* Site Title */
 header h1 {
   margin: 0;
   font-size: 24px;
+  flex-shrink: 0;
 }
 
 /* Navigation Menu */
@@ -53,7 +69,7 @@ header .cta-btn {
   display: none;
   background-color: #007bff;
   border: none;
-  color: rgb(255, 255, 255);
+  color: white;
   font-size: 22px;
   padding: 8px;
   border-radius: 5px;
@@ -80,12 +96,31 @@ header .cta-btn {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
 
+  /* Fix: Show menu when `.open` class is added */
   header nav.open {
-    display: flex;
+    display: flex !important;
+    width: 100%;
   }
 
   header nav a {
     margin: 10px 0;
     font-size: 16px;
+  }
+}
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 20px;
+  }
+
+  header nav a {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+
+  header .cta-btn {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
