@@ -1,9 +1,15 @@
 /* Partners.css */
+
+
+
+
 .partners {
   background-color: #ff6600;
   color: white;
   padding: 40px 0;
   text-align: center;
+  width: 100%;
+  
 }
 
 .partners h3 {

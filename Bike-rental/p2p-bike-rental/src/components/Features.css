@@ -1,36 +1,73 @@
-/* Features.css */
+/* Features Section */
 .features {
-  display: flex;
-  justify-content: space-between;
-  margin: 40px 0;
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
 }
 
+.section-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #6c757d;
+  margin-bottom: 40px;
+}
+
+/* Grid Layout */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Feature Box */
 .feature-box {
-  background-color: white;
+  background: white;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 30%; /* Adjust the width to fit in a row */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box i {
+  font-size: 40px;
+  color: #007bff;
+  margin-bottom: 15px;
 }
 
 .feature-box h3 {
-  font-size: 22px;
+  font-size: 20px;
+  color: #333;
   margin-bottom: 10px;
 }
 
 .feature-box p {
-  font-size: 16px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
 }
 
+/* Hover Effect */
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .features {
-    flex-direction: column; /* Stack vertically on smaller screens */
-    align-items: center; /* Center-align the items */
+  .feature-grid {
+    grid-template-columns: 1fr;
   }
 
   .feature-box {
-    width: 80%; /* Make each card take up more width on smaller screens */
-    margin-bottom: 20px; /* Add space between the cards */
+    width: 90%;
+    margin: 0 auto;
   }
 }

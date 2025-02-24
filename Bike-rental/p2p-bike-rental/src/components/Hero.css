@@ -1,27 +1,102 @@
-/* Hero.css */
+/* Hero Section */
 .hero {
-    background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
-    padding: 80px 0;
-    text-align: center;
-    color: rgb(8, 0, 0);
+  background: url('https://touron2wheelers.com/wp-content/uploads/2024/01/bike-rental-rishikesh-e1684995414534.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  padding: 20px;
+}
+
+/* Dark Overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Container */
+.hero .container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Hero Content */
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #ff6600;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #ff4500;
+}
+
+.btn-secondary:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    height: 80vh;
   }
-  
-  .hero h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
+
+  .hero h1 {
+    font-size: 36px;
   }
-  
+
   .hero p {
-    font-size: 20px;
-    margin-bottom: 40px;
-  }
-  
-  .hero .btn-primary {
-    background-color: #ff6600;
-    padding: 15px 30px;
-    border-radius: 30px;
     font-size: 18px;
-    color: white;
-    text-decoration: none;
   }
-  
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
