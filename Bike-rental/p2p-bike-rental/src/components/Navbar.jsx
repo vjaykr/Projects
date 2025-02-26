@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -25,7 +26,7 @@ const Navbar = () => {
   useEffect(() => {
     if (isMenuOpen) {
       document.addEventListener("click", handleClickOutside);
-      document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+      document.body.style.overflow = "hidden";
     } else {
       document.removeEventListener("click", handleClickOutside);
       document.body.style.overflow = "";
@@ -43,11 +44,11 @@ const Navbar = () => {
         <h1>P2P Bike Rental</h1>
         {/* Navigation Menu */}
         <nav ref={menuRef} className={isMenuOpen ? "open" : ""} aria-expanded={isMenuOpen}>
-          <a href="#">Home</a>
-          <a href="#">Bike Search</a>
-          <a href="#">Become a Bike Owner</a>
-          <a href="#">Support</a>
-          <a href="#" className="cta-btn">Login</a>
+          <Link to="/">Home</Link>
+          <Link to="/bike-search">Bike Search</Link>
+          <Link to="/become-owner">Become a Bike Owner</Link>
+          <Link to="/support">Support</Link>
+          <Link to="/login" className="cta-btn">Login</Link>
         </nav>
 
         {/* Toggle Button */}
