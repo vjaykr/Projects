@@ -10,7 +10,8 @@ import Testimonials from "./components/Testimonials";
 import CtaSection from "./components/CtaSection";
 import Footer from "./components/Footer";
 import BikeSearch from "./components/BikeSearch";
-import BecomeOwner from "./components/BecomeOwner"; // Import BikeSearch component
+import BecomeOwner from "./components/BecomeOwner";
+import Login from "./components/Login";
 
 import "./App.css";
 
@@ -41,6 +42,9 @@ const App = () => {
           <Route path="/bike-search" element={<BikeSearch />} />
            {/* Become Owner Page */}
            <Route path="/become-owner" element={<BecomeOwner />} />
+
+          {/* login */}
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>

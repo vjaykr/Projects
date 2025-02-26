@@ -23,6 +23,8 @@ const Navbar = () => {
     }
   };
 
+  
+
   useEffect(() => {
     if (isMenuOpen) {
       document.addEventListener("click", handleClickOutside);
@@ -37,6 +39,8 @@ const Navbar = () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+
 
   return (
     <header>
@@ -66,3 +70,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
