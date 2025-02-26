@@ -1,204 +1,217 @@
-/* becomeowner.css */
+/* Overall Page Layout */
 .become-owner-page {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* Hero Section */
-  .hero-section {
-    height: 400px;
-    background: url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-  
-  .hero-overlay {
-    text-align: center;
-    color: white;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-  }
-  
-  .hero-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .hero-section p {
-    font-size: 1.2rem;
-  }
-  
-  /* Form Section */
-  .owner-form-container {
-    max-width: 1000px;
-    margin: 0 auto 60px;
-    padding: 0 20px;
-  }
-  
-  .form-wrapper {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-wrapper h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #222;
-  }
-  
-  .owner-form {
-    width: 100%;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  width: 100vw; /* Ensure the page takes up the full width */
+}
+
+/* Hero Section */
+.hero-section {
+  height: 400px;
+  background: url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  width: 100%;  /* Ensure full width */
+}
+
+/* Hero Overlay */
+.hero-overlay {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+}
+
+/* Form Section */
+.owner-form-container {
+  max-width: 1200px;  /* Increase max-width for large screens */
+  margin: 0 auto 60px;
+  padding: 0 20px;
+  width: 100%;  /* Ensure full width */
+}
+
+/* Form Wrapper */
+.form-wrapper {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Grid */
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  width: 100%; /* Ensure full width */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;  /* Full width of container */
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  display: block;
+}
+
+.submit-button:hover {
+  background: #218838;
+}
+
+/* Responsive Design for Form Section */
+@media (max-width: 1366px) {
   .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 30px;
+    justify-content: center;
   }
-  
+
   .form-group {
-    display: flex;
-    flex-direction: column;
+    width: calc(50% - 20px);  /* 2 columns on larger screens */
   }
-  
-  .form-group label {
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #444;
+}
+
+@media (max-width: 900px) {
+  .form-group {
+    width: calc(100% - 20px);  /* Full width on medium screens */
   }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group textarea {
-    height: 100px;
-    resize: vertical;
-  }
-  
-  .form-group.full-width {
-    grid-column: 1 / -1;
-  }
-  
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: #28a745;
-  }
-  
-  .submit-button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 14px 40px;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  .submit-button:hover {
-    background: #218838;
-  }
-  
-  /* Benefits Section */
-  .benefits-section {
-    background: #f8f9fa;
-    padding: 60px 20px;
-  }
-  
-  .benefits-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: #222;
-  }
-  
-  .benefits-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-  }
-  
-  .benefit-item {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .benefit-item h3 {
-    color: #28a745;
-    margin-bottom: 10px;
-  }
-  
-  /* Testimonial Section */
-  .testimonial-section {
-    max-width: 1200px;
-    margin: 0 auto 60px;
-    padding: 0 20px;
-  }
-  
-  .testimonial-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: #222;
-  }
-  
-  .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-  
+}
+
+/* Benefits Section */
+.benefits-section {
+  background: #f8f9fa;
+  padding: 60px 20px;
+}
+
+.benefits-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: #222;
+}
+
+.benefits-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.benefit-item {
+  text-align: center;
+  padding: 20px;
+}
+
+.benefit-item h3 {
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+/* Testimonial Section */
+.testimonial-section {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+}
+
+.testimonial-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: #222;
+}
+
+.testimonial-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.testimonial-card span {
+  color: #666;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1366px) {
   .testimonial-card {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    width: calc(33.33% - 20px);  /* 3 testimonials per row */
   }
-  
-  .testimonial-card p {
-    font-style: italic;
-    margin-bottom: 15px;
+}
+
+@media (max-width: 900px) {
+  .testimonial-card {
+    width: calc(50% - 20px);  /* 2 testimonials per row */
   }
-  
-  .testimonial-card span {
-    color: #666;
-    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .testimonial-card {
+    width: calc(100% - 20px);  /* 1 testimonial per row */
   }
-  
-  @media (max-width: 768px) {
-    .hero-section {
-      height: 300px;
-    }
-  
-    .hero-section h1 {
-      font-size: 2rem;
-    }
-  
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

@@ -42,7 +42,6 @@ const App = () => {
            {/* Become Owner Page */}
            <Route path="/become-owner" element={<BecomeOwner />} />
         </Routes>
-        
       </div>
     </Router>
   );
