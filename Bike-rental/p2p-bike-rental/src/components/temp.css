@@ -1,0 +1,138 @@
+/* Global Fix for Horizontal Scroll Issue */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Navbar Styles */
+  header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Container */
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  /* Site Title */
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  
+  /* Navigation Menu */
+  header nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 123, 255, 0.95);
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  /* Show menu when .open class is added */
+  header nav.open {
+    display: flex;
+    max-height: 500px; /* Expands based on content */
+  }
+  
+  header nav a {
+    color: white;
+    margin: 10px 0;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 8px;
+  }
+  
+  /* CTA Button */
+  header .cta-btn {
+    background-color: #ff6600;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* Mobile Navbar Toggle Button */
+  .navbar-toggle {
+    display: none;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 1080px) {
+    .navbar-toggle {
+      display: inline-block;
+      margin: 10px;
+    }
+  
+    header {
+      position: relative; /* Allow expansion */
+    }
+  
+    header nav {
+      display: none;
+      max-height: 0;
+    }
+  
+    header.open {
+      height: auto; /* Expand header */
+    }
+  
+    header nav.open {
+      max-height: 500px; /* Allow expansion based on content */
+    }
+  
+    header nav a {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+  }
+  
+  /* Tablet Styles */
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 20px;
+    }
+  
+    header nav a {
+      font-size: 12px;
+      margin: 0 5px;
+    }
+  
+    header .cta-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Ensure page content doesn't overlap */
+  main {
+    padding-top: 80px; /* Adjust based on navbar height */
+  }

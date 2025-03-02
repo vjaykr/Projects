@@ -1,104 +1,154 @@
-/* Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Full-screen background */
-  body {
-    height: 100vh;
-    background: url('https://via.placeholder.com/1600x900') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Add slight dark overlay */
-  }
-  
-  /* Login Container */
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Login Box */
-  .login-box {
-    background: rgba(255, 255, 255, 0.2); /* Transparent white background */
-    border-radius: 10px;
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Light shadow for better visibility */
-    backdrop-filter: blur(10px); /* Optional: adds a blur effect behind the login box */
-    text-align: center;
-  }
-  
-  /* Heading */
-  .login-box h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  
-  /* Input Group */
-  .login-input-group {
-    margin-bottom: 20px;
-  }
-  
-  .login-input-group label {
-    display: block;
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 5px;
-  }
-  
-  .login-input-group input {
-    width: 100%;
+.auth-background {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url('https://www.pixel4k.com/wp-content/uploads/2019/06/biker-rider-chilling-on-mountain-side-5k_1560535678.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px; /* Adjust based on your navbar height */
+  box-sizing: border-box;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 0 25px 0 25px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: auto; /* Keeps it centered better with padding */
+  margin-bottom: auto; /* Ensures equal spacing from bottom */
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(45deg, #ffffff20, #ffffff40);
+  color: #333;
+}
+
+.tab-button.active {
+  background: linear-gradient(45deg, #007bff, #00b7ff);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tab-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container {
+  display: flex;
+  width: 200%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.form-box {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-box h2 {
+  color: rgb(255, 255, 255);
+
+}
+
+
+
+.signup-box h2 {
+  color: rgb(255, 255, 255);
+
+}
+
+.signup-box .input-group label{
+  color: rgb(222, 222, 230);
+
+}
+
+
+.login-box .input-group label{
+  color: rgb(222, 222, 230);
+
+}
+
+
+
+.slide-login {
+  transform: translateX(0%);
+}
+
+.slide-signup {
+  transform: translateX(-50%);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(45deg, #007bff, #00b7ff);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-container {
+    width: 90%;
     padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-    transition: 0.3s;
   }
-  
-  /* Input Focus */
-  .login-input-group input:focus {
-    border-color: #00aaff;
-    background: rgba(255, 255, 255, 0.5);
+  .tab-button {
+    font-size: 14px;
   }
-  
-  /* Button */
-  .login-button {
-    background-color: #00aaff;
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Button Hover */
-  .login-button:hover {
-    background-color: #0077cc;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    .login-box {
-      padding: 20px;
-      width: 90%;
-    }
-  }
-  
+}

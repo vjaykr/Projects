@@ -40,7 +40,7 @@ const BecomeOwner = () => {
       </section>
 
       {/* Registration Form */}
-      <section className="owner-form-container">
+      <section className="bikee-owner-form-container">
         <div className="form-wrapper">
           <h2>List Your Bike</h2>
           <form className="owner-form" onSubmit={handleSubmit}>
@@ -92,6 +92,19 @@ const BecomeOwner = () => {
                   name="bikeName"
                   placeholder="My Awesome Bike"
                   value={ownerData.bikeName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="bikeNumber">Bike Number</label>
+                <input
+                  type="text"
+                  id="bikeNumber"
+                  name="bikeNumber"
+                  placeholder="Enter Your Bike Number"
+                  value={ownerData.bikeNumber}
                   onChange={handleInputChange}
                   required
                 />
@@ -164,6 +177,26 @@ const BecomeOwner = () => {
                   required
                 />
               </div>
+
+              <div className="form-group">
+                <label htmlFor="upload">Upload Your Legal Bike Document</label>
+                <input type="file" id="upload" name="upload" accept=".doc,.docx,.pdf" 
+                      placeholder="Upload your bike document here"
+                      value={ownerData.upload}
+                      onChange={handleInputChange}
+                  required
+                />
+                {/* <input
+                  type="file"
+                  id="upload"
+                  name="upload"
+                  placeholder="Upload your bike document here"
+                  value={ownerData.upload}
+                  onChange={handleInputChange}
+                  required
+                /> */}
+              </div>
+
             </div>
 
             <button type="submit" className="submit-button">
@@ -174,7 +207,7 @@ const BecomeOwner = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="benefits-section">
+      <section className="owner-benefits-section">
         <h2>Why Share Your Bike?</h2>
         <div className="benefits-grid">
           <div className="benefit-item">

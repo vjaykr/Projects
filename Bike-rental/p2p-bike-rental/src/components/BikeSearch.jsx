@@ -31,6 +31,8 @@ const BikeSearch = () => {
           <p>Discover bikes from trusted local owners</p>
         </div>
       </section>
+      <marquee behavior="scroll" direction="left">Have a happy and safe ride</marquee>
+
 
       {/* Search Form */}
       <section className="bikesearch-search-section">

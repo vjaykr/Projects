@@ -89,6 +89,9 @@
   margin: 0 auto;
   display: block;
 }
+marquee{
+  color: greenyellow;
+}
 
 .bikesearch-search-button:hover {
   background: #218838;
@@ -188,3 +191,4 @@
     width: calc(100% - 20px);
   }
 }
+

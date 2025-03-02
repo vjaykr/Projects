@@ -1,11 +1,14 @@
 /* Overall Page Layout */
 .become-owner-page {
   font-family: 'Arial', sans-serif;
-  color: #333;
+  color: #cfd20c;
   line-height: 1.6;
   margin: 0;
   padding: 0;
+ 
+  /* border-radius: 0 5px 0px 5px; */
   width: 100vw; /* Ensure the page takes up the full width */
+  /* border:10px solid rgba(74, 14, 186, 0.936) */
 }
 
 /* Hero Section */
@@ -39,18 +42,22 @@
 }
 
 /* Form Section */
-.owner-form-container {
+.bikee-owner-form-container {
   max-width: 1200px;  /* Increase max-width for large screens */
   margin: 0 auto 60px;
   padding: 0 20px;
-  width: 100%;  /* Ensure full width */
+  width: 100%;  
+  border-radius: 55px; /* Use !important to enforce this style */
+  /* Ensure full width */
+  /* http://192.168.0.197:5173/become-owner */
 }
+
 
 /* Form Wrapper */
 .form-wrapper {
   background: white;
   padding: 40px;
-  border-radius: 15px;
+  border-radius: 30px 2px 30px 2px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,13 +102,13 @@
   color: white;
   border: none;
   padding: 14px 40px;
-  border-radius: 5px;
+  border-radius: 12px;
   font-size: 1.1rem;
   cursor: pointer;
   transition: background 0.3s ease;
   width: 100%;
   max-width: 250px;
-  margin: 0 auto;
+  margin: 20px auto;
   display: block;
 }
 
@@ -127,10 +134,16 @@
 }
 
 /* Benefits Section */
-.benefits-section {
+.owner-benefits-section {
   background: #f8f9fa;
-  padding: 60px 20px;
+  padding: 5vw; /* Adjust padding relative to viewport width */
+  border-radius: 20px;
+  margin: 0 auto; /* Center the element horizontally */
+  width: 84.5%; /* Adjust width relative to screen size */
+  max-width: 1200px; /* Optional: Limit the maximum width */
 }
+
+
 
 .benefits-section h2 {
   text-align: center;

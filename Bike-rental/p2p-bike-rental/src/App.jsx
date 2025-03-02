@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import BikeSearch from "./components/BikeSearch";
 import BecomeOwner from "./components/BecomeOwner";
 import Login from "./components/Login";
+import Support from "./components/Support";
 
 import "./App.css";
 
@@ -45,6 +46,8 @@ const App = () => {
 
           {/* login */}
           <Route path="/login" element={<Login />} />
+          {/* Support */}
+          <Route path="/support" element={<Support />} />
         </Routes>
       </div>
     </Router>

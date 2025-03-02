@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
-        <h1>P2P Bike Rental</h1>
+        <h1>P2P <sub>Bike Rental</sub></h1>
         {/* Navigation Menu */}
         <nav ref={menuRef} className={isMenuOpen ? "open" : ""} aria-expanded={isMenuOpen}>
           <Link to="/">Home</Link>
