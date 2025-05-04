@@ -11,15 +11,21 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors()); // Allow all origins, change in production to restrict it
 
-// Debugging: Check if MONGO_URI is loaded
-console.log(process.env.MONGO_URI);
-
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => console.log('Connected to MongoDB'))
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Start server after MongoDB connection is successful
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+      console.log('Access your user interface at http://localhost:5173/');
+
+    });
+  })
   .catch((err) => console.log('Error connecting to MongoDB:', err));
 
 // User Schema
@@ -82,7 +88,3 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ message: 'Error logging in', error: err });
   }
 });
-
-// Start server
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));

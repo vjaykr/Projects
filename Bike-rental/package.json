@@ -1,0 +1,27 @@
+{
+  "name": "bike_rental",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fronted": "cd p2p-bike-rental && npm run dev",
+    "backend": "cd Server && npm run start",
+    "server": "concurrently \"npm run fronted\" \"npm run backend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raushanaman/Bike_rental.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raushanaman/Bike_rental/issues"
+  },
+  "homepage": "https://github.com/raushanaman/Bike_rental#readme",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "concurrently": "^9.1.2"
+  }
+}
