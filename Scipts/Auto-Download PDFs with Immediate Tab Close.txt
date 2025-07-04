@@ -1,0 +1,53 @@
+// ==UserScript==
+// @name         Auto-Download PDFs with Immediate Tab Close
+// @namespace    http://tampermonkey.net/
+// @version      1.4
+// @description  Prompt for custom filename, download PDF, then close the tab immediately after triggering download.
+// @author       You
+// @match        *://*/*.pdf*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    if (window.top !== window.self) return; // Don't run in iframes
+
+    const pdfUrl = window.location.href;
+    console.log("[Tampermonkey] PDF page detected:", pdfUrl);
+
+    const defaultFileName = pdfUrl.split('/').pop().split('?')[0];
+
+    const userFileName = prompt(
+        "Enter a custom filename for the PDF (leave blank to use default):",
+        defaultFileName
+    );
+
+    if (userFileName === null) {
+        console.log("[Tampermonkey] User canceled download. Closing tab.");
+        window.close();
+        return;
+    }
+
+    const finalFileName =
+        userFileName.trim() !== "" ? userFileName.trim() : defaultFileName;
+
+    const fileNameWithExtension = finalFileName.toLowerCase().endsWith('.pdf')
+        ? finalFileName
+        : finalFileName + ".pdf";
+
+    const a = document.createElement('a');
+    a.href = pdfUrl;
+    a.download = fileNameWithExtension;
+    a.style.display = 'none';
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    console.log(`[Tampermonkey] PDF download triggered as: ${fileNameWithExtension}`);
+
+    // Immediately try to close the tab
+    window.close();
+
+})();
