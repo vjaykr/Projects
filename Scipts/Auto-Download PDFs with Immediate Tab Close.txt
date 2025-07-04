@@ -1,53 +1,139 @@
 // ==UserScript==
-// @name         Auto-Download PDFs with Immediate Tab Close
+// @name         Integrated Document Handler
 // @namespace    http://tampermonkey.net/
-// @version      1.4
-// @description  Prompt for custom filename, download PDF, then close the tab immediately after triggering download.
+// @version      4.0
+// @description  Handle dynamic document requests and direct document page loads with custom filenames and auto-close
 // @author       You
-// @match        *://*/*.pdf*
+// @match        *://*/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    if (window.top !== window.self) return; // Don't run in iframes
+    // List of file extensions we want to catch
+    const extensions = [
+        "pdf", "ppt", "pptx", "doc", "docx",
+        "xls", "xlsx", "csv", "txt", "odt", "ods"
+    ];
 
-    const pdfUrl = window.location.href;
-    console.log("[Tampermonkey] PDF page detected:", pdfUrl);
-
-    const defaultFileName = pdfUrl.split('/').pop().split('?')[0];
-
-    const userFileName = prompt(
-        "Enter a custom filename for the PDF (leave blank to use default):",
-        defaultFileName
+    // Build a regex like /\.pdf(\?|#|$)|\.ppt(\?|#|$)|.../
+    const extRegex = new RegExp(
+        `\\.(${extensions.join("|")})(\\?|#|$)`,
+        "i"
     );
 
-    if (userFileName === null) {
-        console.log("[Tampermonkey] User canceled download. Closing tab.");
-        window.close();
-        return;
+    /**
+     * Check if URL matches our extensions
+     */
+    function isDocUrl(url) {
+        return url && extRegex.test(url);
     }
 
-    const finalFileName =
-        userFileName.trim() !== "" ? userFileName.trim() : defaultFileName;
+    /**
+     * Handle dynamic document requests detected via fetch or XHR.
+     * Prompts user to open in new tab.
+     */
+    function handleDynamicDoc(url) {
+        console.log("[Tampermonkey] Document detected via network request:", url);
 
-    const fileNameWithExtension = finalFileName.toLowerCase().endsWith('.pdf')
-        ? finalFileName
-        : finalFileName + ".pdf";
+        const proceed = confirm(
+            `A document file was detected:\n\n${url}\n\nDo you want to open it in a new tab?`
+        );
 
-    const a = document.createElement('a');
-    a.href = pdfUrl;
-    a.download = fileNameWithExtension;
-    a.style.display = 'none';
+        if (proceed) {
+            window.open(url, "_blank");
+        } else {
+            console.log("[Tampermonkey] User canceled opening document.");
+        }
+    }
 
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    /**
+     * Handle direct document page loads.
+     * Prompts for custom filename. Downloads document if confirmed.
+     * Closes tab if user cancels.
+     */
+    function handleDirectDocPage() {
+        const url = window.location.href;
+        console.log("[Tampermonkey] Direct document page detected:", url);
 
-    console.log(`[Tampermonkey] PDF download triggered as: ${fileNameWithExtension}`);
+        // Extract default file name
+        let defaultFileName = url.split("/").pop().split(/[?#]/)[0] || "download";
 
-    // Immediately try to close the tab
-    window.close();
+        // Extract extension if possible
+        let extMatch = defaultFileName.match(/\.([a-z0-9]+)$/i);
+        let extension = extMatch ? extMatch[1] : "";
+
+        // Prompt user for custom name
+        const userFileName = prompt(
+            `Detected a document file: ${defaultFileName}\n\nEnter custom filename (leave blank for default):`,
+            defaultFileName
+        );
+
+        if (userFileName === null) {
+            console.log("[Tampermonkey] User canceled download. Closing tab.");
+            window.close();
+            return;
+        }
+
+        let finalFileName = userFileName.trim();
+
+        if (finalFileName === "") {
+            finalFileName = defaultFileName;
+        } else {
+            // If missing extension, add it
+            if (extension && !finalFileName.toLowerCase().endsWith("." + extension.toLowerCase())) {
+                finalFileName += "." + extension;
+            }
+        }
+
+        // Create download link
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = finalFileName;
+        a.style.display = "none";
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        console.log(`[Tampermonkey] Download triggered as: ${finalFileName}`);
+
+        window.close();
+    }
+
+    // -------------------------------
+    // Hook into fetch
+    // -------------------------------
+    const originalFetch = window.fetch;
+    window.fetch = function (...args) {
+        const url =
+            typeof args[0] === "string"
+                ? args[0]
+                : args[0]?.url || null;
+
+        if (isDocUrl(url)) {
+            handleDynamicDoc(url);
+        }
+        return originalFetch.apply(this, args);
+    };
+
+    // -------------------------------
+    // Hook into XMLHttpRequest
+    // -------------------------------
+    const originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function (method, url) {
+        if (isDocUrl(url)) {
+            handleDynamicDoc(url);
+        }
+        return originalOpen.apply(this, arguments);
+    };
+
+    // -------------------------------
+    // Handle direct page loads
+    // -------------------------------
+    if (window.top === window.self && isDocUrl(window.location.href)) {
+        handleDirectDocPage();
+    }
 
 })();
